@@ -26,7 +26,7 @@ function App() {
 }
 
 // HTTP запрос
-let url = "http://cors-anywhere.herokuapp.com/https://www.mrsoft.by/data.json";
+let url = "https://cors-anywhere.herokuapp.com/https://www.mrsoft.by/data.json";
 let xhr = new XMLHttpRequest();
 xhr.open("GET", url);
 

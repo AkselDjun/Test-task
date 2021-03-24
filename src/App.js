@@ -38,17 +38,19 @@ xhr.onreadystatechange = function () {
     let oldArray = document.querySelector(".pData").textContent = data;
     let newArray = oldArray.slice();
 
+    let pData = document.querySelector(".pData");
+    let inp = document.querySelector(".inp");
 
     // Регистр включен
     document.querySelector(".registrOn").addEventListener('change', function () {
-      document.querySelector(".inp").onkeyup = function () {
-        document.querySelector(".pData").innerHTML = '';
+      inp.onkeyup = function () {
+        pData.innerHTML = '';
         let l = this.value.length;
         if (l > 0) {
           for (let i = 0; i < newArray.length; i++) {
             let _ = newArray[i].split('').slice(0, l).join('');
             if (_ === this.value) {
-              document.querySelector(".pData").innerHTML += newArray[i] + '<br/>';
+              pData.innerHTML += newArray[i] + '<br/>';
             }
           }
         }
@@ -58,14 +60,14 @@ xhr.onreadystatechange = function () {
 
     // Регистр выключен
     document.querySelector(".registrOff").addEventListener('change', function () {
-      document.querySelector(".inp").onkeyup = function () {
-        document.querySelector(".pData").innerHTML = '';
+      inp.onkeyup = function () {
+        pData.innerHTML = '';
         let l = this.value.length;
         if (l > 0) {
           for (let i = 0; i < newArray.length; i++) {
             let _ = newArray[i].toLowerCase().split('').slice(0, l).join('');
             if (_ === this.value) {
-              document.querySelector(".pData").innerHTML += newArray[i] + '<br/>';
+              pData.innerHTML += newArray[i] + '<br/>';
             }
           }
         }
@@ -76,9 +78,9 @@ xhr.onreadystatechange = function () {
     // Фильтр по длине строки
     document.querySelector(".btnLength").addEventListener("click", function () {
       let arrayNonSortLength = data.filter(function (element) {
-        return element.length > document.querySelector(".inp").value;
+        return element.length > inp.value;
       });
-      document.querySelector(".pData").textContent = arrayNonSortLength;
+      pData.textContent = arrayNonSortLength;
     })
 
 
@@ -86,13 +88,12 @@ xhr.onreadystatechange = function () {
     document.querySelector(".btnSubString").addEventListener("click", function () {
       let arraySortSubstr = data.filter(function (element) {
         if (document.querySelector(".registrOff").checked) {
-          return element.toLowerCase().includes(document.querySelector(".inp").value.toLowerCase());
+          return element.toLowerCase().includes(inp.value.toLowerCase());
         } else {
-          // console.log(!!`document.querySelector(".registrOff").value`)
-          return element.includes(document.querySelector(".inp").value);
+          return element.includes(inp.value);
         }
       });
-      document.querySelector(".pData").textContent = arraySortSubstr;
+      pData.textContent = arraySortSubstr;
     })
   }
 
